@@ -40,4 +40,32 @@ async def card(ctx, *, query: str):
 
     await ctx.send(embed=embed)
 
+@bot.command()
+async def roll(ctx, sides: int = 20):
+    import random
+    if sides < 2:
+        await ctx.send("🎲 Minimum sides is 2.")
+    else:
+        result = random.randint(1, sides)
+        await ctx.send(f"🎲 You rolled a {result} on a d{sides}.")
+
+@bot.command()
+async def price(ctx, *, query: str):
+    url = f"https://api.scryfall.com/cards/named?fuzzy={query}"
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        await ctx.send(f"❌ Could not find `{query}`.")
+        return
+
+    data = response.json()
+    price = data.get("prices", {}).get("usd")
+    foil_price = data.get("prices", {}).get("usd_foil")
+    name = data.get("name")
+
+    msg = f"💵 **{name}** price:\n"
+    msg += f"• Normal: ${price if price else 'N/A'}\n"
+    msg += f"• Foil: ${foil_price if foil_price else 'N/A'}"
+    await ctx.send(msg)
+
 bot.run(TOKEN)
