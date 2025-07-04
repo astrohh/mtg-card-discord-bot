@@ -7,6 +7,7 @@ TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix='!', intents=intents)
+intents.message_content = True
 
 @bot.event
 async def on_ready():
