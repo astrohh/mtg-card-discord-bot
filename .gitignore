@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.env.*  # in case you use .env.dev, .env.prod, etc.
+
+# macOS system files
+.DS_Store
+
+# Logs
+*.log
+
+# OS-generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# VSCode settings (optional, but useful if you're using VSCode)
+.vscode/
+
+# Python dependency lock files (optional)
+poetry.lock
+Pipfile.lock
+
+# Compiled C extensions
+*.so
+
+# pyproject.toml / poetry virtual env cache (if using poetry)
+.cache/
+
+# Jupyter notebook checkpoints (if you ever mess with notebooks)
+.ipynb_checkpoints/
+
+# GitHub-specific
+.gitattributes
