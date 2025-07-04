@@ -6,6 +6,10 @@ from discord.ext import commands
 
 load_dotenv()
 
+BLOCKED_USERS = {
+    144307117950631936: "STAY OUTTA FLAVORTOWN",
+}
+
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 print("Loaded token:", TOKEN[:8] + "..." if TOKEN else "No token found")
 
@@ -16,6 +20,14 @@ intents.message_content = True
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
+
+@bot.check
+async def block_users_globally(ctx):
+    if ctx.author.id in BLOCKED_USERS:
+        reason = BLOCKED_USERS[ctx.author.id]
+        await ctx.send(f"🚫 Sorry {ctx.author.display_name}, you can't use this bot. Reason: I could care less.")
+        return False
+    return True
 
 @bot.command()
 async def card(ctx, *, query: str):
