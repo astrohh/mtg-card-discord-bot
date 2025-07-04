@@ -1,9 +1,13 @@
 import os
 import discord
 import requests
+from dotenv import load_dotenv
 from discord.ext import commands
 
+load_dotenv()
+
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+print("Loaded token:", TOKEN[:8] + "..." if TOKEN else "No token found")
 
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix='!', intents=intents)
