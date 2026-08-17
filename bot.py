@@ -11,7 +11,8 @@ BLOCKED_USERS = {
 }
 
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-print("Loaded token:", TOKEN[:8] + "..." if TOKEN else "No token found")
+if not TOKEN:
+    raise SystemExit("DISCORD_BOT_TOKEN is not set — check .env")
 
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix='!', intents=intents)
